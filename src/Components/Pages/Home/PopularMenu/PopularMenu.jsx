@@ -9,7 +9,6 @@ const PopularMenu = () => {
       .then((res) => res.json())
       .then((data) => {
         const popularItems = data.filter((item) => item.category === "popular");
-        console.log(popularItems);
         setMenu(popularItems);
       });
   }, []);
@@ -23,6 +22,9 @@ const PopularMenu = () => {
         {menu.map((item) => (
           <MenuItems key={item._id} item={item}></MenuItems>
         ))}
+      </div>
+      <div className="text-center mb-5">
+        <button className="btn btn-outline">View All Menu</button>
       </div>
     </section>
   );
