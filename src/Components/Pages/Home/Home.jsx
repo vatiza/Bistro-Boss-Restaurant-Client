@@ -7,7 +7,7 @@ import Category from "./Category/Category";
 import Featured from "./Featured/Featured";
 import PopularMenu from "./PopularMenu/PopularMenu";
 import Testimonials from "./Testimonials/Testimonials";
-
+import img from "../../../assets/home/chef-service.jpg";
 const Home = () => {
   return (
     <div>
@@ -16,7 +16,13 @@ const Home = () => {
       </Helmet>
       <Banner></Banner>
       <Category></Category>
-      <MiddleSlide></MiddleSlide>
+      <MiddleSlide
+        img={img}
+        title={"Bistro Boss"}
+        bio={
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, libero accusamus laborum deserunt ratione dolor officiis praesentium! Deserunt magni aperiam dolor eius dolore at, nihil iusto ducimus incidunt quibusdam nemo."
+        }
+      ></MiddleSlide>
       <PopularMenu> </PopularMenu>
       <MiddleCall></MiddleCall>
       <Card></Card>
