@@ -1,4 +1,3 @@
-
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 import MenuItems from "../../Shared/MenuItems/MenuItems";
 import useMenu from "../../../../hooks/useMenu";
