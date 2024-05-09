@@ -4,8 +4,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
-  updateCurrentUser,
-  updateProfile,
+  updateProfile
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import app from "../Firebase/Firebase.Config";
