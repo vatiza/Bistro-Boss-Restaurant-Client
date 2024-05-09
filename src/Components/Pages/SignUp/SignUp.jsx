@@ -10,14 +10,20 @@ const SignUp = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { createNewUser } = useContext(AuthContext);
+  const { createNewUser, updateUserProfile } = useContext(AuthContext);
+
   const onSubmit = (data) => {
     createNewUser(data.email, data.password)
       .then((result) => {
         const newUser = result.user;
+        updateUserProfile(data.name, data.photourl)
+          .then(() => {})
+          .catch((error) => console.log(error));
         console.log(newUser);
       })
-      .catch((errors) => console.log(errors.message));
+      .catch((errors) => {
+        console.log(errors.message);
+      });
     console.log(data);
   };
 
@@ -26,6 +32,7 @@ const SignUp = () => {
       <Helmet>
         <title>Bistro Boss | SignUp</title>
       </Helmet>
+
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center md:w-1/2 lg:text-left">
@@ -51,6 +58,20 @@ const SignUp = () => {
                 />
                 {errors.name && (
                   <span className="text-red-600">Name is required</span>
+                )}
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photourl</span>
+                </label>
+                <input
+                  {...register("photourl", { required: true })}
+                  type="text"
+                  placeholder="Photourl"
+                  className="input input-bordered"
+                />
+                {errors.photourl && (
+                  <span className="text-red-600">Photo Url is required</span>
                 )}
               </div>
               <div className="form-control">
