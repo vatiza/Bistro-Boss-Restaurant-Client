@@ -31,26 +31,30 @@ const SignUp = () => {
                   <span className="label-text">Name</span>
                 </label>
                 <input
-                  {...register("name")}
+                  {...register("name", { required: true })}
                   name="name"
                   type="text"
                   placeholder="Name"
                   className="input input-bordered"
-                  required
                 />
+                {errors.name && (
+                  <span className="text-red-600">Name is required</span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
                 <input
-                  {...register("email")}
+                  {...register("email", { required: true })}
                   name="email"
                   type="email"
                   placeholder="email"
                   className="input input-bordered"
-                  required
                 />
+                {errors.email && (
+                  <span className="text-red-600">Email is required</span>
+                )}
               </div>
 
               <div className="form-control">
@@ -58,13 +62,30 @@ const SignUp = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  {...register("password")}
+                  {...register("password", {
+                    required: true,
+                    minLength: 6,
+                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                  })}
                   name="password"
                   type="password"
                   placeholder="password"
                   className="input input-bordered"
-                  required
                 />
+                {errors.password?.type === "required" && (
+                  <p className="text-red-600">Password is required</p>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <span className="text-red-600">
+                    Password Must be 6 charecters
+                  </span>
+                )}
+                {errors.password?.type === "pattern" && (
+                  <p className="text-red-600">
+                    Password must have one Uppercase one lower case, one number
+                    and one special character.
+                  </p>
+                )}
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">
                     Forgot password?
