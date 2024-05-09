@@ -1,19 +1,31 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { Helmet } from "react-helmet-async";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProviders";
 
 const SignUp = () => {
   const {
     register,
     handleSubmit,
-
     formState: { errors },
   } = useForm();
+  const { createNewUser } = useContext(AuthContext);
   const onSubmit = (data) => {
+    createNewUser(data.email, data.password)
+      .then((result) => {
+        const newUser = result.user;
+        console.log(newUser);
+      })
+      .catch((errors) => console.log(errors.message));
     console.log(data);
   };
 
   return (
     <div>
+      <Helmet>
+        <title>Bistro Boss | SignUp</title>
+      </Helmet>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center md:w-1/2 lg:text-left">
