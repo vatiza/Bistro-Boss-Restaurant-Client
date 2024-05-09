@@ -11,6 +11,7 @@ import MenuCategory from "./MenuCategory/MenuCategory";
 
 const Menu = () => {
   const [menu] = useMenu();
+  
   const desserts = menu.filter((item) => item.category === "dessert");
   const pizza = menu.filter((item) => item.category === "pizza");
   const salad = menu.filter((item) => item.category === "salad");
@@ -37,7 +38,7 @@ const Menu = () => {
       <MenuCategory
         items={desserts}
         img={dessetImg}
-        title={"DESSERTS"}
+        title={"dessert"}
         bio={
           "Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s,  "
         }
@@ -46,7 +47,7 @@ const Menu = () => {
       <MenuCategory
         items={pizza}
         img={pizaaImg}
-        title={"PIZZA"}
+        title={"pizza"}
         bio={
           "Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s,  "
         }
@@ -55,7 +56,7 @@ const Menu = () => {
       <MenuCategory
         items={salad}
         img={saladImg}
-        title={"SALADS"}
+        title={"salads"}
         bio={
           "Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s,  "
         }
@@ -65,7 +66,7 @@ const Menu = () => {
       <MenuCategory
         items={soup}
         img={soupImg}
-        title={"SOUPS"}
+        title={"soups"}
         bio={
           "Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s,  "
         }
