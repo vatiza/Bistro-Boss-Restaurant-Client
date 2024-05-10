@@ -34,7 +34,7 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+
         navigate(from, { replace: true });
       })
       .catch((errror) => console.log(errror.message));
@@ -99,9 +99,11 @@ const Login = () => {
                   required
                 />
               </div>
+
               <div className="form-control mt-6">
+                {/*TODO  btn desabled false  */}
                 <input
-                  disabled={disabled}
+                  disabled={false}
                   className="btn btn-block bg-orange-700"
                   type="submit"
                   value="Login"

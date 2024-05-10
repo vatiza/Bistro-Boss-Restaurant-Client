@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProviders";
 
 const Navbar = () => {
-  const { user, logOut } =useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
 
   const handleLogout = () => {
     logOut()
@@ -83,7 +83,7 @@ const Navbar = () => {
                       alt="Tailwind CSS Navbar component"
                       src={
                         user.photoURL ? (
-                          <>{user?.photoURL}</>
+                          <>{user.photoURL}</>
                         ) : (
                           "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
                         )
