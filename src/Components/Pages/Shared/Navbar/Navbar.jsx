@@ -25,7 +25,7 @@ const Navbar = () => {
         <Link to="/orders/salads">Orders Food</Link>
       </li>
       <li>
-        <Link to="/">
+        <Link to="/dashbord/mycart">
           <div className="indicator">
             <svg
               xmlns="http://www.w3.org/2000/svg"

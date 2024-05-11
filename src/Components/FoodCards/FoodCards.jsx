@@ -12,6 +12,7 @@ const FoodCards = ({ items }) => {
   const [, refetch] = useCarts();
 
   const handleAddtoCart = (items) => {
+    console.log(items);
     if (user && user.email) {
       const cartItem = {
         foodId: _id,
