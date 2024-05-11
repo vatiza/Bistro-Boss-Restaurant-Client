@@ -1,4 +1,8 @@
-import { Outlet } from "react-router-dom";
+import { FaCalendar, FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
+import { GiShoppingBag } from "react-icons/gi";
+import { IoMdMenu } from "react-icons/io";
+import { MdEmail } from "react-icons/md";
+import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   return (
@@ -20,13 +24,92 @@ const Dashboard = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+        <ul className="menu p-4 w-80 min-h-full bg-[#D1A054] text-white">
           {/* Sidebar content here */}
+
           <li>
-            <a>Sidebar Item 1</a>
+            <NavLink
+              to="/"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
+            >
+              <FaHome></FaHome>User Home
+            </NavLink>
           </li>
           <li>
-            <a>Sidebar Item 2</a>
+            <NavLink
+              to="/reservation"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
+            >
+              <FaCalendar></FaCalendar>Reservation
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/paymnethistory"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
+            >
+              <FaWallet></FaWallet>Payment History
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashbord/mycart"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
+            >
+              <FaShoppingCart></FaShoppingCart>My Cart
+            </NavLink>
+          </li>
+          <div className="divider"></div>
+          <li>
+            <NavLink
+              to="/user/home"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
+            >
+              <FaHome></FaHome>Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/menu"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
+            >
+              <IoMdMenu />
+              Menu
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/shop"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
+            >
+              <GiShoppingBag />
+              Shop
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/contact"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
+            >
+              <MdEmail />
+              Contact
+            </NavLink>
           </li>
         </ul>
       </div>
