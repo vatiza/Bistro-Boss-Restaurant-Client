@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProviders";
+import useCarts from "../../../../hooks/useCarts";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [carts] = useCarts();
 
   const handleLogout = () => {
     logOut()
@@ -40,7 +42,7 @@ const Navbar = () => {
               />
             </svg>
             <span className="badge  bg-violet-600  badge-sm indicator-item">
-              8
+            {carts?.length ||0}
             </span>
           </div>
         </Link>
