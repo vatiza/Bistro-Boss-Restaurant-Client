@@ -101,9 +101,8 @@ const Login = () => {
               </div>
 
               <div className="form-control mt-6">
-                {/*TODO  btn desabled false  */}
                 <input
-                  disabled={false}
+                  disabled={disabled}
                   className="btn btn-block bg-orange-700"
                   type="submit"
                   value="Login"

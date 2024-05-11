@@ -3,8 +3,10 @@ import { GiShoppingBag } from "react-icons/gi";
 import { IoMdMenu } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
+import useCarts from "../../hooks/useCarts";
 
 const Dashboard = () => {
+  const [carts] = useCarts();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -64,7 +66,10 @@ const Dashboard = () => {
                 isPending ? "pending" : isActive ? "active" : ""
               }
             >
-              <FaShoppingCart></FaShoppingCart>My Cart
+              <FaShoppingCart></FaShoppingCart>My Cart{" "}
+              <span className="badge   badge-sm indicator-item">
+                {carts?.length || 0}
+              </span>
             </NavLink>
           </li>
           <div className="divider"></div>
