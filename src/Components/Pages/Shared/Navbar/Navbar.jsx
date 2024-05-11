@@ -42,7 +42,7 @@ const Navbar = () => {
               />
             </svg>
             <span className="badge  bg-violet-600  badge-sm indicator-item">
-            {carts?.length ||0}
+              {carts?.length || 0}
             </span>
           </div>
         </Link>
@@ -107,7 +107,7 @@ const Navbar = () => {
                     </a>
                   </li>
                   <li>
-                    <btn onClick={handleLogout}>Logout</btn>
+                    <button onClick={handleLogout}>Logout</button>
                   </li>
                 </ul>
               </div>

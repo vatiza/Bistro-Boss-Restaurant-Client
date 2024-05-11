@@ -21,8 +21,8 @@ const Card = () => {
         subHeading={"CHEF RECOMMENDS"}
       ></SectionTitle>
       <div className="grid grid-cols-3">
-        {cards.map((items) => (
-          <CardInItems key={items._id} items={items}></CardInItems>
+        {cards.map((items,index) => (
+          <CardInItems key={index} items={items}></CardInItems>
         ))}
       </div>
     </section>
