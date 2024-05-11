@@ -1,13 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProviders";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const { createNewUser, updateUserProfile } = useContext(AuthContext);
@@ -17,7 +20,32 @@ const SignUp = () => {
       .then((result) => {
         const newUser = result.user;
         updateUserProfile(data.name, data.photourl)
-          .then(() => {})
+          .then(() => {
+            const userdata = {
+              name: data.name,
+              email: data.email,
+            };
+            fetch("http://localhost:5000/users", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(userdata),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.insertedData) {
+                  reset();
+                  Swal.fire({
+                    title: "Good job!",
+                    text: "Your Account Created Sucessfully!",
+                    icon: "success",
+                  });
+                }
+              });
+
+            navigate("/");
+          })
           .catch((error) => console.log(error));
         console.log(newUser);
       })
