@@ -63,7 +63,7 @@ const Dashboard = () => {
             <NavLink
               to="/dashbord/mycart"
               className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "active" : ""
+                isPending ? "pending" : isActive ? "active " : ""
               }
             >
               <FaShoppingCart></FaShoppingCart>My Cart{" "}
