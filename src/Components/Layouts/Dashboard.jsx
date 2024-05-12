@@ -1,12 +1,24 @@
-import { FaCalendar, FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
+import {
+  FaBookMedical,
+  FaCalendar,
+  FaHome,
+  FaShoppingCart,
+  FaUsers,
+  FaWallet,
+} from "react-icons/fa";
 import { GiShoppingBag } from "react-icons/gi";
 import { IoMdMenu } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import useCarts from "../../hooks/useCarts";
+import { ImSpoonKnife } from "react-icons/im";
 
 const Dashboard = () => {
   const [carts] = useCarts();
+
+  //todo: load data  from the server to have dynamic is isAdmin based on data
+  const isAdmin = true;
+
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -29,50 +41,114 @@ const Dashboard = () => {
         <ul className="menu p-4 w-80 min-h-full bg-[#D1A054] text-white">
           {/* Sidebar content here */}
 
-          <li>
-            <NavLink
-              to="/"
-              className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "active" : ""
-              }
-            >
-              <FaHome></FaHome>User Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/reservation"
-              className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "active" : ""
-              }
-            >
-              <FaCalendar></FaCalendar>Reservation
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/paymnethistory"
-              className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "active" : ""
-              }
-            >
-              <FaWallet></FaWallet>Payment History
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashbord/mycart"
-              className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "active " : ""
-              }
-            >
-              <FaShoppingCart></FaShoppingCart>My Cart{" "}
-              <span className="badge   badge-sm indicator-item">
-                {carts?.length || 0}
-              </span>
-            </NavLink>
-          </li>
-          <div className="divider"></div>
+          {isAdmin ? (
+            <>
+              <li>
+                <NavLink
+                  to="/"
+                  className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "active" : ""
+                  }
+                >
+                  <FaHome></FaHome>Admin Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/reservation"
+                  className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "active" : ""
+                  }
+                >
+                  <ImSpoonKnife />
+                  Add Items
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/paymnethistory"
+                  className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "active" : ""
+                  }
+                >
+                  <IoMdMenu />
+                  Manage Items
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashbord/mycart"
+                  className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "active " : ""
+                  }
+                >
+                  <FaBookMedical />
+                  Manage Bookings
+                  <span className="badge   badge-sm indicator-item">
+                    {carts?.length || 0}
+                  </span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashbord/allusers"
+                  className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "active " : ""
+                  }
+                >
+                  <FaUsers />
+                  All Users
+                </NavLink>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink
+                  to="/"
+                  className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "active" : ""
+                  }
+                >
+                  <FaHome></FaHome>User Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/reservation"
+                  className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "active" : ""
+                  }
+                >
+                  <FaCalendar></FaCalendar>Reservation
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/paymnethistory"
+                  className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "active" : ""
+                  }
+                >
+                  <FaWallet></FaWallet>Payment History
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashbord/mycart"
+                  className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "active " : ""
+                  }
+                >
+                  <FaShoppingCart></FaShoppingCart>My Cart{" "}
+                  <span className="badge   badge-sm indicator-item">
+                    {carts?.length || 0}
+                  </span>
+                </NavLink>
+              </li>
+            </>
+          )}
+          <div className="divider "></div>
           <li>
             <NavLink
               to="/user/home"

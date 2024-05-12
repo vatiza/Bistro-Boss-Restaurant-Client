@@ -34,6 +34,7 @@ const Login = () => {
     const password = form.password.value;
     signIn(email, password)
       .then((result) => {
+        // eslint-disable-next-line no-unused-vars
         const user = result.user;
 
         navigate(from, { replace: true });
