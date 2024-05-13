@@ -1,70 +1,65 @@
-import { createBrowserRouter } from "react-router-dom";
+import {
+    createBrowserRouter,
+  } from "react-router-dom";
+import Main from "../Layout/Main";
+import Home from "../pages/Home/Home/Home";
+import Menu from "../pages/Menu/Menu/Menu";
+import Order from "../pages/Order/Order/Order";
+import Login from "../pages/Login/Login";
+import SignUp from "../pages/SignUp/SignUp";
+import PrivateRoute from "./PrivateRoute";
+import Secret from "../pages/Shared/Secret/Secret";
+import Dashboard from "../Layout/Dashboard";
+import Cart from "../pages/Dashboard/Cart/Cart";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 
-import Main from "../Components/Layouts/Main";
-import Home from "../Components/Pages/Home/Home";
-import Menu from "../Components/Pages/Menu/Menu";
-import Orders from "../Components/Pages/Orders/Orders";
-import Login from "../Components/Pages/Login/Login";
-import SignUp from "../Components/Pages/SignUp/SignUp";
-import PrivateRoutes from "./PrivateRoutes";
-import Secrect from "../Components/Pages/Shared/Secrect/Secrect";
-import Dashboard from "../Components/Layouts/Dashboard";
-import MyCart from "../Components/Pages/Dashbord/MyCart";
-import AllUsers from "../Components/Pages/Dashbord/AllUsers/AllUsers";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Main></Main>,
-    children: [
-      {
-        path: "/",
-        element: <Home></Home>,
-      },
-      {
-        path: "menu",
-        element: <Menu></Menu>,
-      },
-      {
-        path: "/orders/:category",
-        element: <Orders></Orders>,
-      },
-      {
-        path: "/login",
-        element: <Login></Login>,
-      },
-      {
-        path: "/signup",
-        element: <SignUp></SignUp>,
-      },
-      {
-        path: "/secrect",
-        element: (
-          <PrivateRoutes>
-            <Secrect></Secrect>
-          </PrivateRoutes>
-        ),
-      },
-    ],
-  },
-  {
-    path: "/dashbord",
-    element: (
-      <PrivateRoutes>
-        {" "}
-        <Dashboard></Dashboard>
-      </PrivateRoutes>
-    ),
-    children: [
-      {
-        path: "mycart",
-        element: <MyCart></MyCart>,
-      },
-      {
-        path: "allusers",
-        element: <AllUsers></AllUsers>,
-      },
-    ],
-  },
-]);
-export default router;
+  export const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Main></Main>,
+      children: [
+        {
+            path: '/',
+            element: <Home></Home>
+        }, 
+        {
+          path: 'menu', 
+          element: <Menu></Menu>
+        },
+        {
+          path: 'order/:category',
+          element: <Order></Order>
+        },
+        {
+          path: 'login',
+          element: <Login></Login>
+        },
+        {
+          path: 'signup',
+          element: <SignUp></SignUp>
+        },
+        {
+          path: 'secret',
+          element: <PrivateRoute><Secret></Secret></PrivateRoute>
+        }
+      ]
+    },
+    {
+      path: 'dashboard',
+      element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+      children: [
+        {
+          path: 'cart',
+          element: <Cart></Cart>
+        },
+
+        // admin routes
+        {
+          path: 'users',
+          element: <AllUsers></AllUsers>
+        }
+
+      ]
+    }
+  ]);
