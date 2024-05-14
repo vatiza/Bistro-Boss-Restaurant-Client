@@ -1,15 +1,32 @@
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import { useForm } from "react-hook-form";
 
-
-const imgHosting=import.meta.env.VITE_IMGBB_APIKEY;
+const imgHosting_token = import.meta.env.VITE_IMGBB_APIKEY;
 const AddItems = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  const imgHostingUrl = `https://api.imgbb.com/1/upload?key=${imgHosting_token}`;
+  const onSubmit = (data) => {
+    const formData = new FormData();
+    formData.append("image", data.image[0]);
+    fetch(imgHostingUrl, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgResponse) => {
+        if (imgResponse.success) {
+          const imgUrl = imgResponse.data.display_url;
+          const {name,price,category,recipe}=data;
+          const newItem={name,price:parseFloat(price),category,recipe,image:imgUrl}
+          console.log(newItem);
+        }
+      });
+  };
 
   return (
     <div>
@@ -40,9 +57,7 @@ const AddItems = () => {
               {...register("category", { required: true })}
               className="select select-bordered"
             >
-              <option disabled >
-                Pick one
-              </option>
+              <option disabled>Pick one</option>
               <option>Pizza</option>
               <option>Soup</option>
               <option>Salad</option>
