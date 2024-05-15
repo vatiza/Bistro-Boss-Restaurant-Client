@@ -2,8 +2,10 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import toast, { Toaster } from "react-hot-toast";
+import "./CheckOut.css";
 
-const CheckOutForm = ({ price }) => {
+const CheckOutForm = ({ price, cart }) => {
   const { user } = useAuth();
   const stripe = useStripe();
   const elements = useElements();
@@ -12,11 +14,14 @@ const CheckOutForm = ({ price }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProccessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
+  const notify = () => toast.success(" Payments Success!");
+
   useEffect(() => {
-    axiosSecure.post("/create-payment-intent", { price }).then((res) => {
-      console.log(res.data.clientSecret);
-      setClientSecret(res.data.clientSecret);
-    });
+    if (price > 0) {
+      axiosSecure.post("/create-payment-intent", { price }).then((res) => {
+        setClientSecret(res.data.clientSecret);
+      });
+    }
   }, [price, axiosSecure]);
 
   const handleSubmit = async (event) => {
@@ -57,7 +62,26 @@ const CheckOutForm = ({ price }) => {
     setProccessing(false);
     if (paymentIntent.status === "succeeded") {
       setTransactionId(paymentIntent.id);
-      //todo: next steps
+      //save payment information to server
+      const paymentInfo = {
+        email: user?.email,
+        transactionId: paymentIntent.id,
+        date: new Date(),
+        status: "pending",
+        price,
+        quantity: cart.length,
+        cartItems: cart.map((item) => item._id),
+        menuItems: cart.map((item) => item.menuItemId),
+
+        itemsNames: cart.map((item) => item.name),
+      };
+      axiosSecure.post("/payments", paymentInfo).then((res) => {
+        console.log(res.data.insertResult.insertedId);
+        if (res.data.insertResult.insertedId) {
+          // display confitm
+          notify();
+        }
+      });
     }
   };
   return (
@@ -100,6 +124,7 @@ const CheckOutForm = ({ price }) => {
           Transaction Complete with Transaction ID:{transactionId}
         </p>
       )}
+      <Toaster position="top-center" reverseOrder={false} />
     </>
   );
 };
