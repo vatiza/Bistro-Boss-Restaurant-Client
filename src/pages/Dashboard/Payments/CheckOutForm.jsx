@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
-import "./CheckOut.css";
 
 const CheckOutForm = ({ price, cart }) => {
   const { user } = useAuth();
@@ -14,7 +13,8 @@ const CheckOutForm = ({ price, cart }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProccessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
-  const notify = () => toast.success(" Payments Success!");
+  const notify = () => toast.success(" Payment Success!");
+  const notifyError = () => toast.error("Payment Not Success!.");
 
   useEffect(() => {
     if (price > 0) {
@@ -80,6 +80,8 @@ const CheckOutForm = ({ price, cart }) => {
         if (res.data.insertResult.insertedId) {
           // display confitm
           notify();
+        } else {
+          notifyError();
         }
       });
     }
